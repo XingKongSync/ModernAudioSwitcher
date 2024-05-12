@@ -1,7 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// Copyright (c) David Kean. All rights reserved.
+// Copyright (c) David Kean.
 // -----------------------------------------------------------------------
-
 // This source file was altered for use in AudioSwitcher.
 /*
   LICENSE
@@ -34,7 +33,7 @@ using AudioSwitcher.Interop;
 namespace AudioSwitcher.Audio
 {
     [Export(typeof(AudioDeviceManager))]
-    internal class AudioDeviceManager : IMMNotificationClient, IDisposable
+    public class AudioDeviceManager : IMMNotificationClient, IDisposable
     {
         private readonly IMMDeviceEnumerator _deviceEnumerator = (IMMDeviceEnumerator)new MMDeviceEnumerator();
         private readonly SynchronizationContext _synchronizationContext;
@@ -56,7 +55,8 @@ namespace AudioSwitcher.Audio
 
         public AudioDeviceCollection GetAudioDevices(AudioDeviceKind kind, AudioDeviceState state)
         {
-            int hr = _deviceEnumerator.EnumAudioEndpoints(kind, state, out IMMDeviceCollection underlyingCollection);
+            IMMDeviceCollection underlyingCollection;
+            int hr = _deviceEnumerator.EnumAudioEndpoints(kind, state, out underlyingCollection);
             if (hr == HResult.OK)
                 return new AudioDeviceCollection(underlyingCollection);
 
@@ -85,7 +85,8 @@ namespace AudioSwitcher.Audio
             var config = new PolicyConfig();
 
             int hr;
-            if (config is IPolicyConfig2 config2)
+            IPolicyConfig2 config2 = config as IPolicyConfig2;
+            if (config2 != null)
             {   // Windows 7 -> Windows 8.1
                 hr = config2.SetDefaultEndpoint(device.Id, role);
             }
@@ -107,12 +108,13 @@ namespace AudioSwitcher.Audio
             if (defaultDevice == null)
                 return false;
 
-            return string.Equals(defaultDevice.Id, device.Id, StringComparison.OrdinalIgnoreCase);
+            return String.Equals(defaultDevice.Id, device.Id, StringComparison.OrdinalIgnoreCase);
         }
 
         public AudioDevice GetDefaultAudioDevice(AudioDeviceKind kind, AudioDeviceRole role)
         {
-            int hr = _deviceEnumerator.GetDefaultAudioEndpoint(kind, role, out IMMDevice underlyingDevice);
+            IMMDevice underlyingDevice;
+            int hr = _deviceEnumerator.GetDefaultAudioEndpoint(kind, role, out underlyingDevice);
             if (hr == HResult.OK)
                 return new AudioDevice(underlyingDevice);
 
@@ -127,7 +129,8 @@ namespace AudioSwitcher.Audio
             if (id == null)
                 throw new ArgumentNullException("id");
 
-            int hr = _deviceEnumerator.GetDevice(id, out IMMDevice underlyingDevice);
+            IMMDevice underlyingDevice;
+            int hr = _deviceEnumerator.GetDevice(id, out underlyingDevice);
             if (hr == HResult.OK)
                 return new AudioDevice(underlyingDevice);
 
@@ -141,7 +144,7 @@ namespace AudioSwitcher.Audio
         {
             InvokeOnSynchronizationContext(() =>
             {
-                EventHandler<AudioDeviceStateEventArgs> handler = DeviceStateChanged;
+                var handler = DeviceStateChanged;
                 if (handler != null)
                 {
                     AudioDevice device = GetDevice(deviceId);
@@ -157,7 +160,7 @@ namespace AudioSwitcher.Audio
         {
             InvokeOnSynchronizationContext(() =>
             {
-                EventHandler<AudioDeviceEventArgs> handler = DeviceAdded;
+                var handler = DeviceAdded;
                 if (handler != null)
                 {
                     AudioDevice device = GetDevice(deviceId);
@@ -173,7 +176,11 @@ namespace AudioSwitcher.Audio
         {
             InvokeOnSynchronizationContext(() =>
             {
-                DeviceRemoved?.Invoke(this, new AudioDeviceRemovedEventArgs(deviceId));
+                var handler = DeviceRemoved;
+                if (handler != null)
+                {
+                    handler(this, new AudioDeviceRemovedEventArgs(deviceId));
+                }
             });
         }
 
@@ -181,7 +188,7 @@ namespace AudioSwitcher.Audio
         {
             InvokeOnSynchronizationContext(() =>
             {
-                EventHandler<DefaultAudioDeviceEventArgs> handler = DefaultDeviceChanged;
+                var handler = DefaultDeviceChanged;
                 if (handler != null)
                 {
                     AudioDevice device = null;
@@ -197,7 +204,7 @@ namespace AudioSwitcher.Audio
         {
             InvokeOnSynchronizationContext(() =>
             {
-                EventHandler<AudioDeviceEventArgs> handler = DevicePropertyChanged;
+                var handler = DevicePropertyChanged;
                 if (handler != null)
                 {
                     AudioDevice device = GetDevice(deviceId);

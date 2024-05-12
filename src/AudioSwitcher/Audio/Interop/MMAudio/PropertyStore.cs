@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------------------------------
-// Copyright (c) David Kean. All rights reserved.
+// Copyright (c) David Kean.
 // -----------------------------------------------------------------------
-
+// This source file was altered for use in AudioSwitcher.
 /*
   LICENSE
   -------
@@ -23,8 +23,10 @@
      misrepresented as being the original source code.
   3. This notice may not be removed or altered from any source distribution.
 */
+using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Runtime.InteropServices;
-
 using AudioSwitcher.Audio.Interop;
 
 namespace AudioSwitcher.Audio
@@ -32,7 +34,7 @@ namespace AudioSwitcher.Audio
     /// <summary>
     /// Property Store class, only supports reading properties at the moment.
     /// </summary>
-    internal class PropertyStore
+    public class PropertyStore
     {
         private readonly IPropertyStore _underlyingStore;
 
@@ -52,7 +54,8 @@ namespace AudioSwitcher.Audio
         {
             get
             {
-                Marshal.ThrowExceptionForHR(_underlyingStore.GetCount(out int result));
+                int result;
+                Marshal.ThrowExceptionForHR(_underlyingStore.GetCount(out result));
                 return result;
             }
         }
@@ -66,8 +69,9 @@ namespace AudioSwitcher.Audio
         {
             get
             {
+                PropVariant result;
                 PropertyKey key = Get(index);
-                Marshal.ThrowExceptionForHR(_underlyingStore.GetValue(ref key, out PropVariant result));
+                Marshal.ThrowExceptionForHR(_underlyingStore.GetValue(ref key, out result));
                 return new PropertyStoreProperty(key, result);
             }
         }
@@ -99,12 +103,13 @@ namespace AudioSwitcher.Audio
         {
             get
             {
+                PropVariant result;
                 for (int i = 0; i < Count; i++)
                 {
                     PropertyKey other = Get(i);
                     if ((other.formatId == key.formatId) && (other.propertyId == key.propertyId))
                     {
-                        Marshal.ThrowExceptionForHR(_underlyingStore.GetValue(ref other, out PropVariant result));
+                        Marshal.ThrowExceptionForHR(_underlyingStore.GetValue(ref other, out result));
                         return new PropertyStoreProperty(other, result);
                     }
                 }
@@ -119,7 +124,8 @@ namespace AudioSwitcher.Audio
         /// <returns>Property key</returns>
         public PropertyKey Get(int index)
         {
-            Marshal.ThrowExceptionForHR(_underlyingStore.GetAt(index, out PropertyKey key));
+            PropertyKey key;
+            Marshal.ThrowExceptionForHR(_underlyingStore.GetAt(index, out key));
             return key;
         }
 
@@ -129,7 +135,7 @@ namespace AudioSwitcher.Audio
 
             try
             {
-                PropertyStoreProperty property = this[key];
+                var property = this[key];
                 if (property == null || property.IsEmpty)
                     return false;
                 
@@ -158,8 +164,9 @@ namespace AudioSwitcher.Audio
         /// <returns>Property value</returns>
         public PropVariant GetValue(int index)
         {
+            PropVariant result;
             PropertyKey key = Get(index);
-            Marshal.ThrowExceptionForHR(_underlyingStore.GetValue(ref key, out PropVariant result));
+            Marshal.ThrowExceptionForHR(_underlyingStore.GetValue(ref key, out result));
             return result;
         }
     }

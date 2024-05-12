@@ -1,8 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// Copyright (c) David Kean. All rights reserved.
-// -----------------------------------------------------------------------
-
-/*
+﻿/*
   LICENSE
   -------
   Copyright (C) 2007 Ray Molenkamp
@@ -25,7 +21,9 @@
 */
 // adapted for use in AudioSwitcher
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Runtime.InteropServices;
 
 namespace AudioSwitcher.Audio.Interop
@@ -36,7 +34,7 @@ namespace AudioSwitcher.Audio.Interop
     /// contains a union so we have to do an explicit layout
     /// </summary>
     [StructLayout(LayoutKind.Explicit)]
-    internal struct PropVariant
+    public struct PropVariant
     {
         [FieldOffset(0)] private short vt;
         [FieldOffset(2)] private short wReserved1;
@@ -129,7 +127,7 @@ namespace AudioSwitcher.Audio.Interop
         /// </summary>
         private byte[] GetBlob()
         {
-            byte[] blob = new byte[blobVal.Length];
+            var blob = new byte[blobVal.Length];
             Marshal.Copy(blobVal.Data, blob, 0, blob.Length);
             return blob;
         }
@@ -139,14 +137,14 @@ namespace AudioSwitcher.Audio.Interop
         /// </summary>
         public T[] GetBlobAsArrayOf<T>()
         {
-            int blobByteLength = blobVal.Length;
+            var blobByteLength = blobVal.Length;
             var singleInstance = (T) Activator.CreateInstance(typeof (T));
-            int structSize = Marshal.SizeOf(singleInstance);
+            var structSize = Marshal.SizeOf(singleInstance);
             if (blobByteLength%structSize != 0)
             {
-                throw new InvalidDataException(string.Format("Blob size {0} not a multiple of struct size {1}", blobByteLength, structSize));
+                throw new InvalidDataException(String.Format("Blob size {0} not a multiple of struct size {1}", blobByteLength, structSize));
             }
-            int items = blobByteLength/structSize;
+            var items = blobByteLength/structSize;
             var array = new T[items];
             for (int n = 0; n < items; n++)
             {

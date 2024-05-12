@@ -1,6 +1,6 @@
-﻿// -----------------------------------------------------------------------
-// Copyright (c) David Kean. All rights reserved.
-// -----------------------------------------------------------------------
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace AudioSwitcher.Audio
 {
@@ -8,7 +8,7 @@ namespace AudioSwitcher.Audio
     /// The ERole enumeration defines constants that indicate the role 
     /// that the system has assigned to an audio endpoint device
     /// </summary>
-    internal enum AudioDeviceRole
+    public enum AudioDeviceRole
     {
         /// <summary>
         /// Games, system notification sounds, and voice commands.

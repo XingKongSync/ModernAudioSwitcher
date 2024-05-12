@@ -1,0 +1,108 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
+    <AssemblyVersion>1.0.0.3</AssemblyVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="App.xaml.cs~RF3ef778f.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\AudioSwitcher\Audio\AudioDevice.cs" Link="Audio\AudioDevice.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\AudioDeviceCollection.cs" Link="Audio\AudioDeviceCollection.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\AudioDeviceEventArgs.cs" Link="Audio\AudioDeviceEventArgs.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\AudioDeviceKind.cs" Link="Audio\AudioDeviceKind.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\AudioDeviceManager.cs" Link="Audio\AudioDeviceManager.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\AudioDeviceRemovedEventArgs.cs" Link="Audio\AudioDeviceRemovedEventArgs.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\AudioDeviceRole.cs" Link="Audio\AudioDeviceRole.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\AudioDeviceState.cs" Link="Audio\AudioDeviceState.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\AudioDeviceStateEventArgs.cs" Link="Audio\AudioDeviceStateEventArgs.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\DefaultAudioDeviceEventArgs.cs" Link="Audio\DefaultAudioDeviceEventArgs.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\Interop\MMAudio\Blob.cs" Link="Audio\Interop\MMAudio\Blob.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\Interop\MMAudio\ClsCtx.cs" Link="Audio\Interop\MMAudio\ClsCtx.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\Interop\MMAudio\IMMDevice.cs" Link="Audio\Interop\MMAudio\IMMDevice.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\Interop\MMAudio\IMMDeviceCollection.cs" Link="Audio\Interop\MMAudio\IMMDeviceCollection.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\Interop\MMAudio\IMMDeviceEnumerator.cs" Link="Audio\Interop\MMAudio\IMMDeviceEnumerator.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\Interop\MMAudio\IMMEndpoint.cs" Link="Audio\Interop\MMAudio\IMMEndpoint.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\Interop\MMAudio\IMMNotificationClient.cs" Link="Audio\Interop\MMAudio\IMMNotificationClient.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\Interop\MMAudio\IPolicyConfig2.cs" Link="Audio\Interop\MMAudio\IPolicyConfig2.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\Interop\MMAudio\IPolicyConfig3.cs" Link="Audio\Interop\MMAudio\IPolicyConfig3.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\Interop\MMAudio\IPropertyStore.cs" Link="Audio\Interop\MMAudio\IPropertyStore.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\Interop\MMAudio\MMDeviceEnumerator.cs" Link="Audio\Interop\MMAudio\MMDeviceEnumerator.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\Interop\MMAudio\PolicyConfig.cs" Link="Audio\Interop\MMAudio\PolicyConfig.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\Interop\MMAudio\PropertyKey.cs" Link="Audio\Interop\MMAudio\PropertyKey.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\Interop\MMAudio\PropertyKeys.cs" Link="Audio\Interop\MMAudio\PropertyKeys.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\Interop\MMAudio\PropertyStore.cs" Link="Audio\Interop\MMAudio\PropertyStore.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\Interop\MMAudio\PropertyStoreProperty.cs" Link="Audio\Interop\MMAudio\PropertyStoreProperty.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\Interop\MMAudio\PropVariant.cs" Link="Audio\Interop\MMAudio\PropVariant.cs" />
+    <Compile Include="..\AudioSwitcher\Audio\Interop\MMAudio\StorageAccessMode.cs" Link="Audio\Interop\MMAudio\StorageAccessMode.cs" />
+    <Compile Include="..\AudioSwitcher\Interop\ExternalDll.cs" Link="Interop\ExternalDll.cs" />
+    <Compile Include="..\AudioSwitcher\Interop\HResult.cs" Link="Interop\HResult.cs" />
+    <Compile Include="..\AudioSwitcher\IO\StreamExtensions.cs" Link="IO\StreamExtensions.cs" />
+    <Compile Include="..\AudioSwitcher\Presentation\Drawing\DrawingServices.cs" Link="Presentation\Drawing\DrawingServices.cs" />
+    <Compile Include="..\AudioSwitcher\Presentation\Drawing\IconExtractor.cs" Link="Presentation\Drawing\IconExtractor.cs" />
+    <Compile Include="..\AudioSwitcher\Presentation\Drawing\IconInfo.cs" Link="Presentation\Drawing\IconInfo.cs" />
+    <Compile Include="..\AudioSwitcher\Presentation\Drawing\Interop\DllImports.cs" Link="Presentation\Drawing\Interop\DllImports.cs" />
+    <Compile Include="..\AudioSwitcher\Presentation\Drawing\Interop\EnumResNameProc.cs" Link="Presentation\Drawing\Interop\EnumResNameProc.cs" />
+    <Compile Include="..\AudioSwitcher\Presentation\Drawing\Interop\GroupIconDir.cs" Link="Presentation\Drawing\Interop\GroupIconDir.cs" />
+    <Compile Include="..\AudioSwitcher\Presentation\Drawing\Interop\GroupIconDirEntry.cs" Link="Presentation\Drawing\Interop\GroupIconDirEntry.cs" />
+    <Compile Include="..\AudioSwitcher\Presentation\Drawing\Interop\IconDir.cs" Link="Presentation\Drawing\Interop\IconDir.cs" />
+    <Compile Include="..\AudioSwitcher\Presentation\Drawing\Interop\IconDirEntry.cs" Link="Presentation\Drawing\Interop\IconDirEntry.cs" />
+    <Compile Include="..\AudioSwitcher\Presentation\Drawing\Interop\LoadLibraryExFlags.cs" Link="Presentation\Drawing\Interop\LoadLibraryExFlags.cs" />
+    <Compile Include="..\AudioSwitcher\Presentation\Drawing\Interop\LookupIconIdFromDirectoryExFlags.cs" Link="Presentation\Drawing\Interop\LookupIconIdFromDirectoryExFlags.cs" />
+    <Compile Include="..\AudioSwitcher\Presentation\Drawing\Interop\ResourceTypes.cs" Link="Presentation\Drawing\Interop\ResourceTypes.cs" />
+    <Compile Include="..\AudioSwitcher\Presentation\Drawing\Interop\SafeModuleHandle.cs" Link="Presentation\Drawing\Interop\SafeModuleHandle.cs" />
+    <Compile Include="..\AudioSwitcher\Presentation\Drawing\ResourceName.cs" Link="Presentation\Drawing\ResourceName.cs" />
+    <Compile Include="..\AudioSwitcher\Presentation\Drawing\ShellIcon.cs" Link="Presentation\Drawing\ShellIcon.cs" />
+    <Compile Include="..\AudioSwitcher\Presentation\UI\DpiServices.cs" Link="Presentation\UI\DpiServices.cs" />
+    <Compile Include="..\AudioSwitcher\Presentation\UI\Interop\DllImports.cs" Link="Presentation\Interop\DllImports.cs" />
+    <Compile Include="..\AudioSwitcher\Presentation\UI\Interop\MARGINS.cs" Link="Presentation\Interop\MARGINS.cs" />
+    <Compile Include="..\AudioSwitcher\Win32\InteropServices\Win32Marshal.cs" Link="Win32\InteropServices\Win32Marshal.cs" />
+    <Compile Include="..\AudioSwitcher\Win32\RegistryKeyExtensions.cs" Link="Win32\RegistryKeyExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="H.NotifyIcon.Wpf" Version="2.0.128" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="8.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.4" />
+    <PackageReference Include="WPF-UI" Version="3.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Audio\Interop\MMAudio\" />
+    <Folder Include="Interop\" />
+    <Folder Include="Presentation\Drawing\Interop\" />
+    <Folder Include="Presentation\Interop\" />
+    <Folder Include="Presentation\UI\" />
+    <Folder Include="Win32\InteropServices\" />
+    <Folder Include="IO\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Resource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

@@ -1,8 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// Copyright (c) David Kean. All rights reserved.
-// -----------------------------------------------------------------------
-
-/*
+﻿/*
   LICENSE
   -------
   Copyright (C) 2007 Ray Molenkamp
@@ -33,7 +29,7 @@ namespace AudioSwitcher.Audio
     /// Device State
     /// </summary>
     [Flags]
-    internal enum AudioDeviceState
+    public enum AudioDeviceState
     {
         /// <summary>
         /// DEVICE_STATE_ACTIVE

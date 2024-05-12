@@ -1,8 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// Copyright (c) David Kean. All rights reserved.
-// -----------------------------------------------------------------------
-
-using System.Collections;
+﻿using System.Collections;
 /*
   LICENSE
   -------
@@ -31,7 +27,7 @@ using AudioSwitcher.Audio.Interop;
 
 namespace AudioSwitcher.Audio
 {
-    internal class AudioDeviceCollection : IEnumerable<AudioDevice>
+    public class AudioDeviceCollection : IEnumerable<AudioDevice>
     {
         private readonly IMMDeviceCollection _underlyingCollection;
 
@@ -44,7 +40,8 @@ namespace AudioSwitcher.Audio
         {
             get
             {
-                Marshal.ThrowExceptionForHR(_underlyingCollection.GetCount(out int result));
+                int result;
+                Marshal.ThrowExceptionForHR(_underlyingCollection.GetCount(out result));
                 return result;
             }
         }
@@ -53,8 +50,9 @@ namespace AudioSwitcher.Audio
         {
             get
             {
-                Marshal.ThrowExceptionForHR(_underlyingCollection.Item(index, out IMMDevice underlyingDevice));
-
+                IMMDevice underlyingDevice;
+                Marshal.ThrowExceptionForHR(_underlyingCollection.Item(index, out underlyingDevice));
+                
                 return new AudioDevice(underlyingDevice);
             }
         }

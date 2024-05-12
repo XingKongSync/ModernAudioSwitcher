@@ -1,8 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// Copyright (c) David Kean. All rights reserved.
-// -----------------------------------------------------------------------
-
-/*
+﻿/*
   LICENSE
   -------
   Copyright (C) 2007 Ray Molenkamp
@@ -26,11 +22,14 @@
 // modified from Ray Molenkamp's original
 
 
+using System;
+using System.Collections.Generic;
+using System.Text;
 using AudioSwitcher.Audio.Interop;
 
 namespace AudioSwitcher.Audio
 {
-    internal class PropertyStoreProperty
+    public class PropertyStoreProperty
     {
         private PropertyKey _key;
         private PropVariant _value;

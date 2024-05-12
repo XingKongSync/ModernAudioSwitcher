@@ -1,7 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// Copyright (c) David Kean. All rights reserved.
+// Copyright (c) David Kean.
 // -----------------------------------------------------------------------
-
 /*
   LICENSE
   -------
@@ -24,6 +23,8 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace AudioSwitcher.Audio
 {

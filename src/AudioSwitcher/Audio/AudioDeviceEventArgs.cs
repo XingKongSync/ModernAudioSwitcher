@@ -1,12 +1,11 @@
 ﻿// -----------------------------------------------------------------------
-// Copyright (c) David Kean. All rights reserved.
+// Copyright (c) David Kean.
 // -----------------------------------------------------------------------
-
 using System;
 
 namespace AudioSwitcher.Audio
 {
-    internal class AudioDeviceEventArgs : EventArgs
+    public class AudioDeviceEventArgs : EventArgs
     {
         private readonly AudioDevice _device;
 

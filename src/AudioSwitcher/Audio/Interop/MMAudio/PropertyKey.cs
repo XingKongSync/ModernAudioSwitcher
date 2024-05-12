@@ -1,7 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// Copyright (c) David Kean. All rights reserved.
+// Copyright (c) David Kean.
 // -----------------------------------------------------------------------
-
 using System;
 
 namespace AudioSwitcher.Audio
@@ -9,7 +8,7 @@ namespace AudioSwitcher.Audio
     /// <summary>
     /// PROPERTYKEY is defined in wtypes.h
     /// </summary>
-    internal struct PropertyKey
+    public struct PropertyKey
     {
         /// <summary>
         /// Format ID

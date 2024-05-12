@@ -1,0 +1,41 @@
+﻿<ui:ContentDialog x:Class="ModernAudioSwitcher.Controls.InputBoxDialog"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                  xmlns:local="clr-namespace:ModernAudioSwitcher.Controls"
+                  mc:Ignorable="d" 
+                  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                  xmlns:ctr="clr-namespace:ModernAudioSwitcher.Controls"
+                  xmlns:res="clr-namespace:ModernAudioSwitcher.Resources"
+                  d:DesignHeight="200" d:DesignWidth="500"
+                  x:Name="self"
+                  Title="Title"
+                  CloseButtonText="{x:Static res:Resource.Close}"
+                  PrimaryButtonText="{x:Static res:Resource.OK}">
+    <ui:ContentDialog.Resources>
+        <Style BasedOn="{StaticResource {x:Type ui:ContentDialog}}" TargetType="{x:Type local:InputBoxDialog}"/>
+        <ObjectDataProvider x:Key="IconProvider" ObjectType="{x:Type ctr:IconProvider}" MethodName="GetIcons"/>
+    </ui:ContentDialog.Resources>
+    <Grid Width="400" Height="100">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--Icon Selector-->
+        <ComboBox Margin="0 0 10 0" ItemsSource="{Binding Source={StaticResource IconProvider}}" SelectedItem="{Binding Icon, ElementName=self}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <Viewbox Height="70" Width="50">
+                        <ui:SymbolIcon Symbol="{Binding}"/>
+                    </Viewbox>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <!--Input-->
+        <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+            <ui:TextBox Text="{Binding ElementName=self, Path=InputValue}" PlaceholderText="{Binding ElementName=self, Path=Placeholder}" VerticalAlignment="Center"/>
+            <ui:TextBox Text="{Binding ElementName=self, Path=SecondaryInputValue}" PlaceholderText="{Binding ElementName=self, Path=SecondaryPlaceHolder}" VerticalAlignment="Center" Margin="0 15 0 0"/>
+        </StackPanel>
+    </Grid>
+</ui:ContentDialog>

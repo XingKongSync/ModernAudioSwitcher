@@ -1,11 +1,10 @@
 ﻿// -----------------------------------------------------------------------
-// Copyright (c) David Kean. All rights reserved.
+// Copyright (c) David Kean.
 // -----------------------------------------------------------------------
-
 using System;
 using System.ComponentModel.Composition;
-
 using AudioSwitcher.ApplicationModel;
+using AudioSwitcher.Audio;
 
 namespace AudioSwitcher.Audio
 {
@@ -21,7 +20,7 @@ namespace AudioSwitcher.Audio
             _manager = manager;
         }
 
-        public bool Run()
+        public bool Startup()
         {
             _manager.DeviceStateChanged += OnDeviceStateChanged;
             return true;

@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="ModernAudioSwitcher.Views.TrayView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ModernAudioSwitcher.Views"
+             mc:Ignorable="d" 
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:vm="clr-namespace:ModernAudioSwitcher.ViewModels"
+             xmlns:cvt="clr-namespace:ModernAudioSwitcher.Converters"
+             xmlns:res="clr-namespace:ModernAudioSwitcher.Resources"
+             ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+             ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+             d:DesignHeight="200" d:DesignWidth="300"
+             Width="500">
+    <UserControl.DataContext>
+        <vm:TrayViewModel />
+    </UserControl.DataContext>
+
+    <Border CornerRadius="4" Background="{DynamicResource SolidBackgroundFillColorBaseBrush}">
+        <Grid Margin="5">
+            <ui:ListView Margin="5" ItemsSource="{Binding Presets}" ItemTemplate="{StaticResource PresetListTemplate}"
+                         Visibility="{Binding Presets.Count, Converter={cvt:EmptyCollectionToVisibilityConverter}}"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+            <Border Visibility="{Binding Presets.Count, Converter={cvt:EmptyCollectionToVisibilityConverter}, ConverterParameter=Invert}"
+                    Height="80">
+                <ui:TextBlock FontTypography="BodyStrong" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{x:Static res:Resource.NoPresetTips}"/>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

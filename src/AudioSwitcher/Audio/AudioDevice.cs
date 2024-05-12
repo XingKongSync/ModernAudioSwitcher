@@ -1,8 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// Copyright (c) David Kean. All rights reserved.
-// -----------------------------------------------------------------------
-
-/*
+﻿/*
   LICENSE
   -------
   Copyright (C) 2007 Ray Molenkamp
@@ -29,7 +25,7 @@ using System.Runtime.InteropServices;
 
 namespace AudioSwitcher.Audio
 {
-    internal class AudioDevice
+    public class AudioDevice
     {
         private readonly IMMDevice _underlyingDevice;
         private PropertyStore _propertyStore;
@@ -57,7 +53,8 @@ namespace AudioSwitcher.Audio
 
         public bool TryGetDeviceDescription(out string result)
         {
-            if (Properties.TryGetValue(PropertyKeys.PKEY_Device_DeviceDesc, out object value))
+            object value;
+            if (Properties.TryGetValue(PropertyKeys.PKEY_Device_DeviceDesc, out value))
             {
                 result = (string)value;
                 return true;
@@ -69,7 +66,8 @@ namespace AudioSwitcher.Audio
 
         public bool TryGetFriendlyName(out string result)
         {
-            if (Properties.TryGetValue(PropertyKeys.PKEY_Device_FriendlyName, out object value))
+            object value;
+            if (Properties.TryGetValue(PropertyKeys.PKEY_Device_FriendlyName, out value))
             {
                 result = (string)value;
                 return true;
@@ -81,7 +79,8 @@ namespace AudioSwitcher.Audio
 
         public bool TryDeviceFriendlyName(out string result)
         {
-            if (Properties.TryGetValue(PropertyKeys.PKEY_DeviceInterface_FriendlyName, out object value))
+            object value;
+            if (Properties.TryGetValue(PropertyKeys.PKEY_DeviceInterface_FriendlyName, out value))
             {
                 result = (string)value;
                 return true;
@@ -93,7 +92,8 @@ namespace AudioSwitcher.Audio
 
         public bool TryGetDeviceClassIconPath(out string result)
         {
-            if (Properties.TryGetValue(PropertyKeys.PKEY_DeviceClass_IconPath, out object value))
+            object value;
+            if (Properties.TryGetValue(PropertyKeys.PKEY_DeviceClass_IconPath, out value))
             {
                 result = (string)value;
                 return true;
@@ -107,7 +107,8 @@ namespace AudioSwitcher.Audio
         {
             get
             {
-                Marshal.ThrowExceptionForHR(_underlyingDevice.GetId(out string result));
+                string result;
+                Marshal.ThrowExceptionForHR(_underlyingDevice.GetId(out result));
                 return result;
             }
         }
@@ -116,8 +117,9 @@ namespace AudioSwitcher.Audio
         {
             get
             {
+                AudioDeviceKind result;
                 var ep = (IMMEndpoint)_underlyingDevice;
-                ep.GetDataFlow(out AudioDeviceKind result);
+                ep.GetDataFlow(out result);
                 return result;
             }
         }
@@ -126,21 +128,24 @@ namespace AudioSwitcher.Audio
         {
             get
             {
-                Marshal.ThrowExceptionForHR(_underlyingDevice.GetState(out AudioDeviceState result));
+                AudioDeviceState result;
+                Marshal.ThrowExceptionForHR(_underlyingDevice.GetState(out result));
                 return result;
             }
         }
 
         public override string ToString()
         {
-            TryGetFriendlyName(out string result);
+            string result;
+            TryGetFriendlyName(out result);
 
             return result;
         }
 
         private PropertyStore OpenPropertyStore()
         {
-            Marshal.ThrowExceptionForHR(_underlyingDevice.OpenPropertyStore(StorageAccessMode.Read, out IPropertyStore underlyingPropertyStore));
+            IPropertyStore underlyingPropertyStore;
+            Marshal.ThrowExceptionForHR(_underlyingDevice.OpenPropertyStore(StorageAccessMode.Read, out underlyingPropertyStore));
             return new PropertyStore(underlyingPropertyStore);
         }
     }
