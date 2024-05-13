@@ -12,7 +12,7 @@ This is a project based on [Audio-Switcher](https://github.com/davkean/audio-swi
 - An option to set auto run when windows starting
 - Support Efficiency Mode
 
-## ScreenShot
+## Screenshot
 
 **Presets**
 
